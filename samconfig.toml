@@ -1,0 +1,11 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "web-client"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-11otlm1qgtcw0"
+s3_prefix = "web-client"
+region = "eu-west-1"
+capabilities = "CAPABILITY_NAMED_IAM"
+parameter_overrides = "ProjectSource=\"https://github.com/iot-cloud-system-final-assignment-mc/web-client.git\" GithubOwner=\"iot-cloud-system-final-assignment-mc\" GithubRepo=\"web-client\" GithubOAuthToken=\"\" GithubBranch=\"main\" DeployBucket=\"\" DistributionId=\"\""
+image_repositories = []
