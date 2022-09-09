@@ -4,6 +4,8 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import SettingsPage from "./settings";
 import ProjectsPage from "./projects";
 import MembersPage from "./members";
+import ProductsPage from "./products";
+import UpsertProductPage from "./upsertProduct";
 import AboutPage from "./about";
 import TeamsPage from "./teams";
 import HomePage from "./home";
@@ -32,6 +34,15 @@ const renderPrivateRoutes = () => {
         </Route>
         <Route path="/about">
           <AboutPage />
+        </Route>
+        <Route path="/products">
+          <ProductsPage />
+        </Route>
+        <Route path="/product/add">
+          <UpsertProductPage mode="add" />
+        </Route>
+        <Route path="/product/:id">
+          <UpsertProductPage mode="edit" />
         </Route>
         <Route path="/another/teams">
           <TeamsPage />
