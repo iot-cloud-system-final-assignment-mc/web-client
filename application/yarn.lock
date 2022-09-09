@@ -2416,10 +2416,10 @@ autoprefixer@^9.4.5, autoprefixer@^9.6.1:
     postcss "^7.0.32"
     postcss-value-parser "^4.1.0"
 
-awesome-react-icons@1.3.3:
-  version "1.3.3"
-  resolved "https://registry.yarnpkg.com/awesome-react-icons/-/awesome-react-icons-1.3.3.tgz#38b2b8bed18840bb22be2776fac42c857fe1059c"
-  integrity sha512-KAq8tB6uLoohg3dI4lkXEbgM7LezKoPd4DUK7396NsPmCROvhEGz6BKeCI+bZjXKz1QExYu9aA6uQTBLxqC+3g==
+awesome-react-icons@^1.4.8:
+  version "1.4.8"
+  resolved "https://registry.yarnpkg.com/awesome-react-icons/-/awesome-react-icons-1.4.8.tgz#ec472fd5a7c44833ff506850107a9bd2b032c7e1"
+  integrity sha512-bYvYLi0NQlCNaB0ZpCIXO+4ZlGeiyyt+gGfJqXzUdvvifsua8414caT1pWvOg4f5KgGPcfqNUAwvcXDfxtRIZA==
 
 aws-sign2@~0.7.0:
   version "0.7.0"
