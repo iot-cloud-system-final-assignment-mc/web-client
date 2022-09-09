@@ -37,11 +37,9 @@ Resources:
         Location: !Ref PipelineBucket
         Type: S3
       Stages:
-        - 
-          Name: Source
+        - Name: Source
           Actions: 
-            - 
-              Name: SourceAction
+            - Name: SourceAction
               ActionTypeId: 
                 Category: Source
                 Owner: ThirdParty
@@ -55,11 +53,9 @@ Resources:
                 Repo: !Ref GithubRepo
                 Branch: !Ref GithubBranch
                 OAuthToken: !Ref GithubOAuthToken
-        - 
-          Name: Build
+        - Name: Build
           Actions: 
-            - 
-              Name: BuildAction
+            - Name: BuildAction
               ActionTypeId: 
                 Category: Build
                 Owner: AWS
@@ -79,8 +75,7 @@ Resources:
       AssumeRolePolicyDocument:
         Version: "2012-10-17"
         Statement:
-          - 
-            Effect: Allow
+          - Effect: Allow
             Principal:
               Service:
                 - "codebuild.amazonaws.com"
@@ -92,8 +87,7 @@ Resources:
           PolicyDocument:
             Version: "2012-10-17"
             Statement: 
-              - 
-                Effect: Allow
+              - Effect: Allow
                 Action:
                   - "s3:GetObject"
                   - "s3:GetObjectVersion"
@@ -102,8 +96,7 @@ Resources:
                 Resource: 
                   - !GetAtt PipelineBucket.Arn
                   - !Join ['', [!GetAtt PipelineBucket.Arn, "/*"]]
-              - 
-                Effect: Allow
+              - Effect: Allow
                 Action:
                   - "s3:DeleteObject"
                   - "s3:GetObject"
@@ -115,13 +108,13 @@ Resources:
                 Resource: 
                   - !Join ['', ["arn:aws:s3:::", !Ref DeployBucket]]
                   - !Join ['', [!Join [ '', [ "arn:aws:s3:::", !Ref DeployBucket ] ], "/*"]]
-              -
-                Effect: Allow
+              - Effect: Allow
                 Action:
                   - "logs:CreateLogGroup"
                   - "logs:CreateLogStream"
                   - "logs:PutLogEvents"
                   - "cloudfront:CreateInvalidation"
+                  - "cloudformation:ListExports"
                 Resource:
                   - "*"
   CodePipeLineRole:
@@ -130,8 +123,7 @@ Resources:
       AssumeRolePolicyDocument:
         Version: "2012-10-17"
         Statement:
-          - 
-            Effect: Allow
+          - Effect: Allow
             Principal:
               Service:
                 - "codepipeline.amazonaws.com"
@@ -142,8 +134,7 @@ Resources:
           PolicyDocument:
             Version: "2012-10-17"
             Statement: 
-              - 
-                Effect: Allow
+              - Effect: Allow
                 Action:
                   - "s3:GetObject"
                   - "s3:GetObjectVersion"
@@ -152,8 +143,7 @@ Resources:
                 Resource: 
                   - !GetAtt PipelineBucket.Arn
                   - !Join ['', [!GetAtt PipelineBucket.Arn, "/*"]]
-              - 
-                Effect: Allow  
+              - Effect: Allow  
                 Action:
                   - "codebuild:BatchGetBuilds"
                   - "codebuild:StartBuild"
@@ -166,13 +156,11 @@ Resources:
       Artifacts:
         Type: CODEPIPELINE
         Name: WebClientProject
-      Source: 
-        Type: CODEPIPELINE
       Environment:
         ComputeType: BUILD_GENERAL1_SMALL
         Type: LINUX_CONTAINER
         Image: "aws/codebuild/standard:5.0"
-      Source:
+      Source: 
         Type: CODEPIPELINE
         BuildSpec: !Sub |
           version: 0.2
