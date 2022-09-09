@@ -20,10 +20,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "yarn watch:css && react-scripts build",
+    "build": "yarn generate-env-files && yarn watch:css && react-scripts build",
     "test": "react-scripts test",
     "watch:css": "postcss src/styles/main.css -o src/styles/main.bundle.css",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "generate-env-files": "bash ./scripts/generate-env-files.sh"
   },
   "eslintConfig": {
     "extends": [
