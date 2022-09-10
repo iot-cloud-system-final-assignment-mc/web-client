@@ -23,13 +23,13 @@ export const BaseTable = (props) => {
   }
 
   return (
-    <table className="table-auto">
+    <table className="table-auto" style={{marginLeft: "auto", marginRight: "auto", textAlign: "center"}}>
       <thead>
         <tr>
           {columns.map((column) => (
             <th className="px-4 py-2" style={{ cursor: "pointer" }} onClick={() => sortValues(column)}>{column}</th>
           ))}
-          <th className="px-4 py-2">Actions</th>
+          {props.buttons && <th className="px-4 py-2">Actions</th>}
         </tr>
       </thead>
       <tbody>
@@ -53,9 +53,6 @@ export const BaseTable = (props) => {
             <td>
               {
                 row.buttons.map((button) => {
-                  console.log(button);
-                  console.log(props);
-                  console.log(props[button.onClick]);
                   return (
                     <Icon name={button.icon} style={{cursor: "pointer"}} onClick={() => props[button.onClick](button.args)} />
                   )

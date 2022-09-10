@@ -52,11 +52,11 @@ const UpsertProductPage = (props) => {
 
     return (
         <DashboardLayout>
-            <h1>{props.mode === "add" ? "Add a new product" : "Edit a product"}</h1>
-            <div><input type="hidden" name="product_id" value={product_id} /></div>
-            <div><label>Name</label><input type="text" name="name" value={name} onChange={handleChange} /></div>
-            <div><label>Price</label><input type="text" name="price" value={price} onChange={handleChange} /></div>
-            <div><button onClick={handleSave}>Save</button></div>
+            <h1 style={{textAlign: "center"}}>{props.mode === "add" ? "Add a new product" : "Edit a product"}</h1>
+            <div style={{textAlign: "center"}}><input type="hidden" name="product_id" value={product_id} /></div><br/>
+            <div style={{textAlign: "center"}}><label>Name</label><br/><input type="text" name="name" value={name} onChange={handleChange} style={{textAlign: "center"}}/></div><br/>
+            <div style={{textAlign: "center"}}><label>Price</label><br/><input type="text" name="price" value={price} onChange={handleChange} style={{textAlign: "center"}}/></div><br/>
+            <div style={{textAlign: "center"}}><button onClick={handleSave}>Save</button></div>
 
         </DashboardLayout>
     )

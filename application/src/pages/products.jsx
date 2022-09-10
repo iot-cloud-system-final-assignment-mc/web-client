@@ -33,7 +33,7 @@ const ProductsPage = () => {
                         {
                             "icon": "plus",
                             "onClick": "actionOne",
-                            "args": {product_id: product.product_id}
+                            "args": {product_id: product.product_id, name: product.name, price: product.price}
                         }
                     ]
                 };
@@ -45,14 +45,14 @@ const ProductsPage = () => {
     }, []);
     
     const handleAdd = (args) => {
-        history.push("/order/add", args.product_id);
+        history.push("/order/add", args);
     }
 
     return (
         <DashboardLayout>
-            <h1>Products</h1>
-            <BaseTable columns={columns} values={values} actionOne={handleAdd}/>
-            <div><button onClick={() => history.push("/product/add")}>Add</button></div>
+            <h1 style={{textAlign: "center"}}>Products</h1>
+            <BaseTable columns={columns} values={values} actionOne={handleAdd} buttons={true}/><br/>
+            <div style={{textAlign: "center"}}><button onClick={() => history.push("/product/add")}>Add</button></div>
         </DashboardLayout>
     )
 }

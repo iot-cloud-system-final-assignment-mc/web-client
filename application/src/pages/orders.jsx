@@ -21,6 +21,10 @@ const OrdersPage = () => {
                         value: order.order_id,
                         url: `/order/${order.order_id}`
                     },
+                    product_id: {
+                        value: order.order_id,
+                        url: `/order/${order.product_id}`
+                    },
                     username: {
                         value: order.username
                     },
@@ -32,7 +36,8 @@ const OrdersPage = () => {
                     },
                     updated_at: {
                         value: order.updated_at
-                    }
+                    },
+                    buttons: []
                 };
             });
             setValues(data);
@@ -42,8 +47,8 @@ const OrdersPage = () => {
     }, []);
     return (
         <DashboardLayout>
-            <h1>Orders</h1>
-            <BaseTable columns={columns} values={values} />
+            <h1 style={{textAlign: "center"}}>Orders</h1>
+            <BaseTable columns={columns} values={values} buttons={false}/><br/>
             {/* <div><button onClick={() => history.push("/order/add")}>Add</button></div> */}
         </DashboardLayout>
     )
