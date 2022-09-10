@@ -28,7 +28,14 @@ const ProductsPage = () => {
                     },
                     updated_at: {
                         value: product.updated_at
-                    }
+                    },
+                    buttons: [
+                        {
+                            "icon": "plus",
+                            "onClick": "actionOne",
+                            "args": {product_id: product.product_id}
+                        }
+                    ]
                 };
             });
             setValues(data);
@@ -36,10 +43,15 @@ const ProductsPage = () => {
             console.log(error);
         });
     }, []);
+    
+    const handleAdd = (args) => {
+        history.push("/order/add", args.product_id);
+    }
+
     return (
         <DashboardLayout>
             <h1>Products</h1>
-            <BaseTable columns={columns} values={values} />
+            <BaseTable columns={columns} values={values} actionOne={handleAdd}/>
             <div><button onClick={() => history.push("/product/add")}>Add</button></div>
         </DashboardLayout>
     )
