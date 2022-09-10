@@ -7,7 +7,7 @@ const SettingsPage = () => {
   return (
     <DashboardLayout>
       <h2>Settings Page</h2>
-      <a href="#" onClick={CognitoApi.logout}>Logout</a>
+      <a href="./#" onClick={CognitoApi.logout}>Logout</a>
     </DashboardLayout>
   )
 }

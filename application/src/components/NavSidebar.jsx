@@ -5,6 +5,7 @@ import Icon from "awesome-react-icons";
 import React, { useState } from "react";
 
 import "react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css";
+import { CognitoApi } from '../api/cognito';
 
 export const NavSidebar = () => {
   const history = useHistory();
@@ -54,7 +55,7 @@ export const NavSidebar = () => {
               title: "Home",
               itemId: "/home",
               // Optional
-              elemBefore: () => <Icon name="coffee" />
+              elemBefore: () => <Icon name="book" />
             },
             {
               title: "Products",
@@ -76,36 +77,12 @@ export const NavSidebar = () => {
                     }
                   ]
             },
-            // {
-            //   title: "About",
-            //   itemId: "/about",
-            //   elemBefore: () => <Icon name="user" />,
-            //   subNav: [
-            //     {
-            //       title: "Projects",
-            //       itemId: "/about/projects",
-            //       // Optional
-            //       elemBefore: () => <Icon name="cloud-snow" />
-            //     },
-            //     {
-            //       title: "Members",
-            //       itemId: "/about/members",
-            //       elemBefore: () => <Icon name="coffee" />
-            //     }
-            //   ]
-            // },
-            // {
-            //   title: "Another Tab",
-            //   itemId: "/another",
-            //   subNav: [
-            //     {
-            //       title: "Teams",
-            //       itemId: "/another/teams"
-            //       // Optional
-            //       // elemBefore: () => <Icon name="calendar" />
-            //     }
-            //   ]
-            // }
+            {
+              title: "Your orders",
+              itemId: "/orders",
+              // Optional
+              elemBefore: () => <Icon name="coffee" />
+            }
           ]}
         />
 
@@ -114,13 +91,18 @@ export const NavSidebar = () => {
             activeItemId={location.pathname}
             items={[
               {
-                title: "Settings",
-                itemId: "/settings",
+                title: "Logout",
+                itemId: "/logout",
                 elemBefore: () => <Icon name="activity" />
+
               }
             ]}
             onSelect={({ itemId }) => {
+              if(itemId !== '/logout') {
               history.push(itemId);
+              } else {
+                CognitoApi.logout()
+              }
             }}
           />
         </div>

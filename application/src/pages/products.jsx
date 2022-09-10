@@ -4,13 +4,12 @@ import { DashboardLayout } from '../components/Layout';
 import { BaseTable } from '../components/baseTable';
 
 import { ProductsApi } from '../api/products';
-import { useHistory, useLocation } from "react-router-dom";
-
-const columns = ["product_id", "name", "price"];
+import { useHistory } from "react-router-dom";
 
 const ProductsPage = () => {
     const [values, setValues] = useState([]);
     const history = useHistory();
+    const columns = ["product_id", "name", "price", "updated_at"];
 
     useEffect(() => {
         ProductsApi.getProducts().then(response => {
@@ -26,6 +25,9 @@ const ProductsPage = () => {
                     },
                     price: {
                         value: product.price
+                    },
+                    updated_at: {
+                        value: product.updated_at
                     }
                 };
             });

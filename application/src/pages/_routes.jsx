@@ -11,6 +11,7 @@ import TeamsPage from "./teams";
 import HomePage from "./home";
 import LoginPage from "./login";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+import OrdersPage from "./orders";
 
 const renderPublicRoutes = () => {
   return (
@@ -42,6 +43,15 @@ const renderPrivateRoutes = () => {
           <UpsertProductPage mode="add" />
         </Route>
         <Route path="/product/:id">
+          <UpsertProductPage mode="edit" />
+        </Route>
+        <Route path="/orders">
+          <OrdersPage />
+        </Route>
+        <Route path="/order/add">
+          <UpsertProductPage mode="add" />
+        </Route>
+        <Route path="/order/:id">
           <UpsertProductPage mode="edit" />
         </Route>
         <Route path="/another/teams">
