@@ -76,6 +76,13 @@ class AuthUtils {
     isTokenExpired() {
         return this.isTokenExpiresIn(0);
     }
+
+    getAuthHeader() {
+        const token = this.getIdToken();
+        return {
+            Authorization: `Bearer ${token}`
+        };
+    }
 }
 
 const authUtils = new AuthUtils();
