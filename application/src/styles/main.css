@@ -24,3 +24,8 @@
     position: relative;
   }
 }
+
+.icon-wrapper,
+.icon-wrapper * {
+  display: inline-block !important;
+}
