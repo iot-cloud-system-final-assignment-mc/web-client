@@ -19227,6 +19227,11 @@ video {
   }
 }
 
+.icon-wrapper,
+.icon-wrapper * {
+  display: inline-block !important;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
