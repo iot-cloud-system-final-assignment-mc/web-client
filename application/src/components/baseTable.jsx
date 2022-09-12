@@ -23,7 +23,7 @@ export const BaseTable = (props) => {
   }
 
   return (
-    <table className="table-auto" style={{marginLeft: "auto", marginRight: "auto", textAlign: "center"}}>
+    <table className="table-auto" style={{ marginLeft: "auto", marginRight: "auto", textAlign: "center" }}>
       <thead>
         <tr>
           {columns.map((column) => (
@@ -39,13 +39,13 @@ export const BaseTable = (props) => {
               columns.map((column, index) => (
                 <td className="border px-4 py-2">
                   {
-                    index === 0 && <a href="#" onClick={() => history.push(row[column].url, row)}>{row[column].value}</a>
-                  }
-                  {
-                    index > 0 && column !== "updated_at" && row[column].value
-                  }
-                  {
-                    column === "updated_at" && new Date(row[column].value).toLocaleString()
+                    column !== "updated_at" ?
+                      (
+                        row[column].url ?
+                          <a href="#" onClick={() => history.push(row[column].url, row)}>{row[column].value}</a> :
+                          row[column].value
+                      ) :
+                      new Date(row[column].value).toLocaleString()
                   }
                 </td>
               ))
@@ -54,7 +54,7 @@ export const BaseTable = (props) => {
               {
                 row.buttons.map((button) => {
                   return (
-                    <Icon name={button.icon} style={{cursor: "pointer"}} onClick={() => props[button.onClick](button.args)} />
+                    <Icon name={button.icon} style={{ cursor: "pointer" }} onClick={() => props[button.onClick](button.args)} />
                   )
                 })
               }
