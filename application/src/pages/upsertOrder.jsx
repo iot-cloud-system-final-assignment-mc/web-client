@@ -13,11 +13,11 @@ const UpsertOrderPage = (props) => {
     const [quantity, setQuantity] = useState(1);
     const [total_price, setTotalPrice] = useState(0);
     const [price, setPrice] = useState(0);
+    const [status, setStatus] = useState("pending");
     const history = useHistory();
     const location = useLocation();
 
     useEffect(() => {
-        console.log(location.state)
         if (props.mode === "edit") {
             if (location.state === undefined) history.push("/orders");
             else {
@@ -25,12 +25,14 @@ const UpsertOrderPage = (props) => {
                 setUsername(location.state.username.value);
                 setQuantity(location.state.quantity.value);
                 setProductId(location.state.product_id.value);
+                setStatus(location.state.status.value);
+                setTotalPrice(location.state.total_price.value);
             }
         } else {
             setProductId(location.state.product_id);
+            setTotalPrice(location.state.price);
         }
         setProductName(location.state.name);
-        setTotalPrice(location.state.price);
         setPrice(location.state.price);
     }, []);
 
@@ -39,15 +41,17 @@ const UpsertOrderPage = (props) => {
         if (name === "quantity" && value >= 1) {
             setQuantity(value);
             setTotalPrice(value * price);
+        } else if (name === "status") {
+            setStatus(value);
         }
     }
 
     const handleSave = () => {
-        console.log("save");
         const order = {
             username,
             product_id,
-            quantity
+            quantity,
+            status
         };
 
         if (order_id) order.order_id = order_id;
@@ -62,12 +66,20 @@ const UpsertOrderPage = (props) => {
 
     return (
         <DashboardLayout>
-            <h1 style={{textAlign: "center"}}>{props.mode === "add" ? "Add a new order" : "Edit a order"}</h1>
+            <h1 style={{ textAlign: "center" }}>{props.mode === "add" ? "Add a new order" : "Edit a order"}</h1>
             <div><input type="hidden" name="order_id" value={order_id} /></div>
-            <div style={{textAlign: "center"}}><label>Product:</label><br/><input type="text" readOnly name="product-id" value={product_name + " - " + product_id}  style={{textAlign: "center"}}/></div><br/>
-            <div style={{textAlign: "center"}}><label>Quantity</label><br/><input type="number" name="quantity" value={quantity} onChange={handleChange} style={{textAlign: "center"}}/></div><br/>
-            <div style={{textAlign: "center"}}><label>Total Price</label><br/><input type="number" readOnly name="total-price" value={total_price}  style={{textAlign: "center"}}/></div><br/>
-            <div style={{textAlign: "center"}}><button onClick={handleSave}>Save</button></div>
+            <div style={{ textAlign: "center" }}><label>Product:</label><br /><input type="text" readOnly name="product-id" value={product_name + " - " + product_id} style={{ textAlign: "center" }} /></div><br />
+            <div style={{ textAlign: "center" }}><label>Quantity</label><br /><input readOnly={props.mode === "edit"} type="number" name="quantity" value={quantity} onChange={handleChange} style={{ textAlign: "center" }} /></div><br />
+            <div style={{ textAlign: "center" }}><label>Total Price</label><br /><input type="number" readOnly name="total-price" value={total_price} style={{ textAlign: "center" }} /></div><br />
+            <div style={{ textAlign: "center" }}><label>Status</label><br />
+                <select readOnly={props.mode === "edit"} name="status" value={status} onChange={handleChange} style={{ textAlign: "center" }}>
+                    <option value="pending">Pending</option>
+                    <option value="shipped">Shipped</option>
+                    <option value="delivered">Delivered</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+            </div><br />
+            <div style={{ textAlign: "center" }}><button onClick={handleSave}>Save</button></div>
 
         </DashboardLayout>
     )
