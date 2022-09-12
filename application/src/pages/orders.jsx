@@ -10,7 +10,7 @@ import { OrdersApi } from '../api/orders';
 const OrdersPage = () => {
     const [values, setValues] = useState([]);
     // const history = useHistory();
-    const columns = ["order_id", "username", "quantity", "total_price", "updated_at"];
+    const columns = ["order_id", "product_id", "username", "quantity", "total_price", "status", "updated_at"];
 
     useEffect(() => {
         OrdersApi.getOrders().then(response => {
@@ -22,8 +22,7 @@ const OrdersPage = () => {
                         url: `/order/${order.order_id}`
                     },
                     product_id: {
-                        value: order.order_id,
-                        url: `/order/${order.product_id}`
+                        value: order.product_id
                     },
                     username: {
                         value: order.username
@@ -33,6 +32,9 @@ const OrdersPage = () => {
                     },
                     total_price: {
                         value: order.total_price
+                    },
+                    status: {
+                        value: order.status
                     },
                     updated_at: {
                         value: order.updated_at
