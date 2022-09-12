@@ -57,7 +57,7 @@ const OrdersPage = () => {
                 return {
                     order_id: {
                         value: order.order_id,
-                        url: `/order/${order.order_id}`
+                        url: order.status === "pending" ? `/order/${order.order_id}` : null
                     },
                     product_id: {
                         value: order.product_id
