@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from "react-router-dom";
 import { OrdersApi } from '../api/orders';
-import AuthUtils from "../utils/authUtils";
+import authUtils from "../utils/authUtils";
 
 import { DashboardLayout } from '../components/Layout';
 
 const UpsertOrderPage = (props) => {
     const [order_id, setOrderId] = useState("");
-    const [username, setUsername] = useState(AuthUtils.getIdTokenPayload()["cognito:username"]);
+    const [username, setUsername] = useState(authUtils.getIdTokenPayload()["cognito:username"]);
     const [product_name, setProductName] = useState("");
     const [product_id, setProductId] = useState("");
     const [quantity, setQuantity] = useState(1);
@@ -16,6 +16,8 @@ const UpsertOrderPage = (props) => {
     const [status, setStatus] = useState("pending");
     const history = useHistory();
     const location = useLocation();
+    const paylod = authUtils.getIdTokenPayload();
+    const isAdmin = paylod['cognito:groups'] && paylod['cognito:groups'].includes('SystemAdmins'); 
 
     useEffect(() => {
         if (props.mode === "edit") {
@@ -72,13 +74,18 @@ const UpsertOrderPage = (props) => {
             <div style={{ textAlign: "center" }}><label>Quantity</label><br /><input readOnly={props.mode === "edit"} type="number" name="quantity" value={quantity} onChange={handleChange} style={{ textAlign: "center" }} /></div><br />
             <div style={{ textAlign: "center" }}><label>Total Price</label><br /><input type="number" readOnly name="total-price" value={total_price} style={{ textAlign: "center" }} /></div><br />
             <div style={{ textAlign: "center" }}><label>Status</label><br />
-                <select readOnly={props.mode === "edit"} name="status" value={status} onChange={handleChange} style={{ textAlign: "center" }}>
-                    <option value="pending">Pending</option>
-                    <option value="shipped">Shipped</option>
-                    <option value="delivered">Delivered</option>
-                    <option value="cancelled">Cancelled</option>
-                </select>
-            </div><br />
+                {
+                    isAdmin ?
+                        (
+                            <select readOnly={props.mode === "edit"} name="status" value={status} onChange={handleChange} style={{ textAlign: "center" }}>
+                                <option value="pending">Pending</option>
+                                <option value="shipped">Shipped</option>
+                                <option value="delivered">Delivered</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                        ) :
+                        (<p>{status}</p>)
+                }</div><br />
             <div style={{ textAlign: "center" }}><button onClick={handleSave}>Save</button></div>
 
         </DashboardLayout>
