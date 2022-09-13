@@ -50,15 +50,17 @@ export const BaseTable = (props) => {
                 </td>
               ))
             }
-            <td>
-              {
-                row.buttons.map((button) => {
-                  return (
-                    <Icon name={button.icon} style={{ cursor: "pointer" }} onClick={() => props[button.onClick](button.args)} />
-                  )
-                })
-              }
-            </td>
+            {props.buttons && (
+              <td>
+                {
+                  row.buttons.map((button) => {
+                    return (
+                      <Icon name={button.icon} style={{ cursor: "pointer" }} onClick={() => props[button.onClick](button.args)} />
+                    )
+                  })
+                }
+              </td>
+            )}
           </tr>
         ))}
       </tbody>
