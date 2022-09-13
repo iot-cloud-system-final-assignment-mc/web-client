@@ -70,8 +70,8 @@ const UpsertOrderPage = (props) => {
         <DashboardLayout>
             <h1 style={{ textAlign: "center" }}>{props.mode === "add" ? "Add a new order" : "Edit a order"}</h1>
             <div><input type="hidden" name="order_id" value={order_id} /></div>
-            <div style={{ textAlign: "center" }}><label>Product:</label><br /><input type="text" readOnly name="product-id" value={product_name + " - " + product_id} style={{ textAlign: "center" }} /></div><br />
-            <div style={{ textAlign: "center" }}><label>Quantity</label><br /><input readOnly={props.mode === "edit"} type="number" name="quantity" value={quantity} onChange={handleChange} style={{ textAlign: "center" }} /></div><br />
+            <div style={{ textAlign: "center" }}><label>Product:</label><br /><input type="text" readOnly name="product-id" value={product_id} style={{ textAlign: "center" }} /></div><br />
+            <div style={{ textAlign: "center" }}><label>Quantity</label><br /><input readOnly={props.mode === "edit" && status !== "pending"} type="number" name="quantity" value={quantity} onChange={handleChange} style={{ textAlign: "center" }} /></div><br />
             <div style={{ textAlign: "center" }}><label>Total Price</label><br /><input type="number" readOnly name="total-price" value={total_price} style={{ textAlign: "center" }} /></div><br />
             <div style={{ textAlign: "center" }}><label>Status</label><br />
                 {

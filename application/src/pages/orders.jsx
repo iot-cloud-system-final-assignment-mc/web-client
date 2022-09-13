@@ -14,6 +14,7 @@ const OrdersPage = () => {
     const columns = ["order_id", "product_id", "username", "quantity", "total_price", "status", "updated_at"];
     const paylod = authUtils.getIdTokenPayload();
     const isAdmin = paylod['cognito:groups'] && paylod['cognito:groups'].includes('SystemAdmins'); 
+    const username = paylod['cognito:username']; 
 
     useEffect(() => {
         getOrders();
@@ -62,7 +63,7 @@ const OrdersPage = () => {
                 return {
                     order_id: {
                         value: order.order_id,
-                        url: order.status === "pending" ? `/order/${order.order_id}` : null
+                        url: order.status === "pending" && username === order.username ? `/order/${order.order_id}` : null
                     },
                     product_id: {
                         value: order.product_id
