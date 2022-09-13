@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from "react-router-dom";
 import { OrdersApi } from '../api/orders';
-import AuthUtils from "../utils/authUtils";
+import authUtils from "../utils/authUtils";
 
 import { DashboardLayout } from '../components/Layout';
 
 const UpsertOrderPage = (props) => {
     const [order_id, setOrderId] = useState("");
-    const [username, setUsername] = useState(AuthUtils.getIdTokenPayload()["cognito:username"]);
+    const [username, setUsername] = useState(authUtils.getIdTokenPayload()["cognito:username"]);
     const [product_name, setProductName] = useState("");
     const [product_id, setProductId] = useState("");
     const [quantity, setQuantity] = useState(1);

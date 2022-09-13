@@ -1,10 +1,10 @@
 import { api_gateway } from "../config/api_gateway.jsx";
-import AuthUtils from "../utils/authUtils.jsx";
+import authUtils from "../utils/authUtils.jsx";
 import axios from 'axios'
 
 export const ProductsApi = {
     getProducts: async () => {
-        const headers = AuthUtils.getAuthHeader();
+        const headers = authUtils.getAuthHeader();
         const response = await axios.get(`${api_gateway.url}products`, {headers});
         return response.data;
     },
