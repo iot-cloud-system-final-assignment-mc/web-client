@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 
 import "react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css";
 import { CognitoApi } from '../api/cognito';
-import AuthUtils from '../utils/authUtils';
+import authUtils from '../utils/authUtils';
 
 export const NavSidebar = () => {
   const history = useHistory();
@@ -15,7 +15,7 @@ export const NavSidebar = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   
   useEffect(() => {
-    const paylod = AuthUtils.getIdTokenPayload();
+    const paylod = authUtils.getIdTokenPayload();
     if (paylod['cognito:groups'] && paylod['cognito:groups'].includes('SystemAdmins')) {
       setIsAdmin(true);
     }
