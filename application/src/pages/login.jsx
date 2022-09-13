@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { CognitoApi } from '../api/cognito';
 
 const LoginPage = () => {
-  const [cognitoUrl, setCognitoUrl] = useState('');
+  const [cognitoUrlLogin, setCognitoUrlLogin] = useState('');
+  const [cognitoUrlSignup, setCognitoUrlSignup] = useState('');
 
   useEffect(() => {
     CognitoApi.createCognitoUrl().then(response => {
-      //console.log(response);
-      setCognitoUrl(response);
+      console.log(response);
+      setCognitoUrlLogin(response);
+      setCognitoUrlSignup(response.replace("oauth2/authorize","signup"));
     }).catch(error => {
       console.log(error);
     });
@@ -29,7 +31,14 @@ const LoginPage = () => {
 
   return (
     <>
-      {cognitoUrl && <a href={cognitoUrl}>Login</a>}
+      {cognitoUrlLogin && cognitoUrlSignup && 
+        (
+          <>
+            <div style={{ position: 'absolute', left: "50%", top: "30%"}}><a href={cognitoUrlLogin}>Login</a></div>
+            <div style={{ position: 'absolute', left: "50%", top: "40%"}}><a href={cognitoUrlSignup}>Signup</a></div>
+          </>
+        )
+      }
     </>
   )
 }
