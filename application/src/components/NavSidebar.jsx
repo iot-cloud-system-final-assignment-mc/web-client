@@ -2,15 +2,24 @@
 import { Navigation } from "react-minimal-side-navigation";
 import { useHistory, useLocation } from "react-router-dom";
 import Icon from "awesome-react-icons";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css";
 import { CognitoApi } from '../api/cognito';
+import AuthUtils from '../utils/authUtils';
 
 export const NavSidebar = () => {
   const history = useHistory();
   const location = useLocation();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
+  
+  useEffect(() => {
+    const paylod = AuthUtils.getIdTokenPayload();
+    if (paylod['cognito:groups'] && paylod['cognito:groups'].includes('SystemAdmins')) {
+      setIsAdmin(true);
+    }
+  }, []);
 
   return (
     <React.Fragment>
@@ -57,7 +66,7 @@ export const NavSidebar = () => {
               // Optional
               elemBefore: () => <Icon name="book" />
             },
-            {
+            isAdmin && {
               title: "Products",
               itemId: "/products",
               // Optional
@@ -77,8 +86,14 @@ export const NavSidebar = () => {
                     }
                   ]
             },
+            !isAdmin && {
+              title: "Products",
+              itemId: "/products",
+              // Optional
+              elemBefore: () => <Icon name="briefcase" />
+            },
             {
-              title: "Your orders",
+              title: isAdmin ? "All orders" : "Your orders",
               itemId: "/orders",
               // Optional
               elemBefore: () => <Icon name="coffee" />
