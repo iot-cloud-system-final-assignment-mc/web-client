@@ -52,7 +52,7 @@ const ProductsPage = () => {
         <DashboardLayout>
             <h1 style={{textAlign: "center"}}>Products</h1>
             <BaseTable columns={columns} values={values} actionOne={handleAdd} buttons={true}/><br/>
-            <div style={{textAlign: "center"}}><button onClick={() => history.push("/product/add")}>Add</button></div>
+            {/* <div style={{textAlign: "center"}}><button onClick={() => history.push("/product/add")}>Add</button></div> */}
         </DashboardLayout>
     )
 }
