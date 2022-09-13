@@ -9,7 +9,8 @@ export const OrdersApi = {
         return response.data;
     },
     upsertOrder: async (order) => {
-        const response = await axios.post(`${api_gateway.url}order`, order);
+        const headers = authUtils.getAuthHeader();
+        const response = await axios.post(`${api_gateway.url}order`, order, {headers});
         return response.data;
     }
 }
