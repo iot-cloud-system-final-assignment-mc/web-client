@@ -7,7 +7,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     CognitoApi.createCognitoUrl().then(response => {
-      console.log(response);
+      //console.log(response);
       setCognitoUrlLogin(response);
       setCognitoUrlSignup(response.replace("oauth2/authorize","signup"));
     }).catch(error => {
