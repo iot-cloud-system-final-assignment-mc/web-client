@@ -9,7 +9,8 @@ export const ProductsApi = {
         return response.data;
     },
     upsertProduct: async (product) => {
-        const response = await axios.post(`${api_gateway.url}product`, product);
+        const headers = authUtils.getAuthHeader();
+        const response = await axios.post(`${api_gateway.url}product`, product, {headers});
         return response.data;
     }
 }
