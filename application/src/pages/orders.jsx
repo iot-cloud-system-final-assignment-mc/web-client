@@ -83,7 +83,8 @@ const OrdersPage = () => {
                     updated_at: {
                         value: order.updated_at
                     },
-                    buttons: buttons
+                    buttons: buttons,
+                    price: order.total_price / order.quantity
                 };
             });
             setValues(data);
