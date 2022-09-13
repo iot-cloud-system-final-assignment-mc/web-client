@@ -29,3 +29,15 @@
 .icon-wrapper * {
   display: inline-block !important;
 }
+
+.title {
+  @apply text-2xl font-bold text-gray-800;
+  text-align: center;
+  margin: 20px;
+}
+
+.body {
+  @apply text-gray-800;
+  text-align: center;
+  margin: 20px;
+}
