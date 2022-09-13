@@ -25,10 +25,10 @@ const renderPublicRoutes = () => {
   );
 }
 
-const renderPrivateRoutes = () => {
+const renderPrivateRoutes = (isAdmin) => {
   return (
     <Switch>
-        <Route path="/about/members">
+        {/* <Route path="/about/members">
           <MembersPage />
         </Route>
         <Route path="/about/projects">
@@ -36,14 +36,14 @@ const renderPrivateRoutes = () => {
         </Route>
         <Route path="/about">
           <AboutPage />
-        </Route>
+        </Route> */}
         <Route path="/products">
           <ProductsPage />
         </Route>
-        <Route path="/product/add">
+        isAdmin && <Route path="/product/add">
           <UpsertProductPage mode="add" />
         </Route>
-        <Route path="/product/:id">
+        isAdmin && <Route path="/product/:id">
           <UpsertProductPage mode="edit" />
         </Route>
         <Route path="/orders">
@@ -52,15 +52,15 @@ const renderPrivateRoutes = () => {
         <Route path="/order/add">
           <UpsertOrderPage mode="add" />
         </Route>
-        <Route path="/order/:id">
+        isAdmin && <Route path="/order/:id">
           <UpsertOrderPage mode="edit" />
         </Route>
-        <Route path="/another/teams">
+        {/* <Route path="/another/teams">
           <TeamsPage />
         </Route>
         <Route path="/settings">
           <SettingsPage />
-        </Route>
+        </Route> */}
         <Route path="/">
           <HomePage />
         </Route>
@@ -70,9 +70,10 @@ const renderPrivateRoutes = () => {
 }
 
 const Routes = (props) => {
+  const isAdmin = props.modality === "private" && props.isAdmin;
   return (
     <BrowserRouter>
-      {props.modality === "private" ? renderPrivateRoutes() : renderPublicRoutes()}
+      {props.modality === "private" ? renderPrivateRoutes(isAdmin) : renderPublicRoutes()}
     </BrowserRouter>
   );
 };
