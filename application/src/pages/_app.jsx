@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 
 import Routes from "./_routes";
-import AuthUtils from "../utils/authUtils";
+import authUtils from "../utils/authUtils";
 
 const App = () => {
   const [routesType, setRoutesType] = useState("public");
 
 
   useEffect(() => {
-    if (AuthUtils.checkToken()) {
+    if (authUtils.checkToken()) {
       setRoutesType("private");
     } else {
       setRoutesType("public");
