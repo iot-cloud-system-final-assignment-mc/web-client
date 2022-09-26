@@ -22,7 +22,7 @@ export const CognitoApi = {
             .then((data) => {
                 const url = data.authorization_endpoint.replace("/oauth2/authorize", "/logout");
                 const clientId = cognito.app_client;
-                const redirectUrl = `${window.location.origin}`;
+                const redirectUrl = encodeURIComponent(`${window.location.origin}/`);
                 const queryParams = `?client_id=${clientId}&logout_uri=${redirectUrl}`;
                 localStorage.clear();
                 window.location.href = `${url}${queryParams}`;
